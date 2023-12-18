@@ -3,13 +3,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         try {
             String filePath = "C:\\Users\\Pichau\\Desktop\\java-spring-ultimate\\nelio-object-oriented-programing\\Java-Object-Oriented-Programming-Expert\\17-programacao-funcional-expressoes-lambda\\base-de-dados\\base-de-dados.csv";
             Map<String, Double> totalSalesBySeller = calculateTotalSalesBySeller(filePath);
+            
             displayTotalSalesBySeller(totalSalesBySeller);
         } catch (IOException e) {
             System.out.println("Erro: " + e.getMessage());
@@ -45,7 +45,7 @@ public class Main {
     }
 
     private static void displayTotalSalesBySeller(Map<String, Double> totalSalesBySeller) {
-        System.out.println("Total de vendas por vendedor:");
+        System.out.println("\nTotal de vendas por vendedor:");
 
         totalSalesBySeller.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
