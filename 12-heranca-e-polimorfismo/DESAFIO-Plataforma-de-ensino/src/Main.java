@@ -18,7 +18,7 @@ public class Main {
 
         // Preencher a lista com as informações das aulas
         for (int i = 0; i < numLessons; i++) {
-            System.out.println("\nDados da " + (i + 1) + "a aula:");
+            System.out.println(STR."\nDados da \{i + 1}a aula:");
 
             // Perguntar se é conteúdo ou tarefa
             System.out.print("Conteúdo ou tarefa (c/t)? ");
@@ -64,7 +64,7 @@ public class Main {
         int totalDuration = calculateTotalDuration(lessons);
 
         // Exibir a duração total do curso
-        System.out.println("DURAÇÃO TOTAL DO CURSO = " + totalDuration + " segundos");
+        System.out.println(STR."\nDURAÇÃO TOTAL DO CURSO = \{totalDuration} segundos");
     }
 
     private static int calculateTotalDuration(List<Lesson> lessons) {
