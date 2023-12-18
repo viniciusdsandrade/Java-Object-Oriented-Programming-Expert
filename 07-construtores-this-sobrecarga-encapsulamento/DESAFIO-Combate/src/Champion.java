@@ -1,8 +1,10 @@
+import static java.lang.StringTemplate.STR;
+
 public class Champion {
-    private String name;
+    private final String name;
     private int life;
-    private int attack;
-    private int armor;
+    private final int attack;
+    private final int armor;
 
     public Champion(String name, int life, int attack, int armor) {
         this.name = name;
@@ -32,6 +34,6 @@ public class Champion {
     }
 
     public String status() {
-        return STR."\{this.name} - Vida: \{this.life}\{this.life == 0 ? " (morreu)" : ""}";
+        return STR."\{this.name}: \{this.life} de vida \{this.life == 0 ? " (morreu)" : ""}";
     }
 }

@@ -27,10 +27,8 @@ public class TaxPayer {
     }
 
     private double calculateSalaryTax() {
-        if (salaryIncome < 3000) return 0;
-        return salaryIncome < 5000 ?
-                salaryIncome * SALARY_TAX_RATE_1 :
-                salaryIncome * SALARY_TAX_RATE_2;
+        if (salaryIncome < 36000) return 0;
+        return salaryIncome < 60000 ? salaryIncome * SALARY_TAX_RATE_1 : salaryIncome * SALARY_TAX_RATE_2;
     }
 
     private double calculateServicesTax() {
@@ -42,23 +40,25 @@ public class TaxPayer {
     }
 
     public double getGrossTax() {
-        return formatDecimal(this.calculateSalaryTax() + this.calculateServicesTax() + this.calculateCapitalTax());
+        return formatDecimal(calculateSalaryTax() + calculateServicesTax() + calculateCapitalTax());
     }
 
     public double getNetTax() {
-        double grossTax = this.getGrossTax();
-        double maxDeduction = Math.min(grossTax * MAX_DEDUCTION_RATE, healthSpending + educationSpending);
-        double netTax = grossTax - maxDeduction;
-        return formatDecimal(Math.max(netTax, 0));
+        double grossTax = getGrossTax();
+        double maxDeduction = Math.min(grossTax * MAX_DEDUCTION_RATE, healthAndEducationSpending());
+        return formatDecimal(grossTax - maxDeduction);
     }
 
     public double getTaxRebate() {
-        double grossTax = this.getGrossTax();
-        double maxDeduction = Math.min(grossTax * MAX_DEDUCTION_RATE, healthSpending + educationSpending);
+        double maxDeduction = Math.min(getGrossTax() * MAX_DEDUCTION_RATE, healthAndEducationSpending());
         return formatDecimal(maxDeduction);
     }
 
-    private double formatDecimal(double value) {
+    private double healthAndEducationSpending() {
+        return healthSpending + educationSpending;
+    }
+
+    static double formatDecimal(double value) {
         DecimalFormat df = new DecimalFormat("#.##");
         return Double.parseDouble(df.format(value));
     }
