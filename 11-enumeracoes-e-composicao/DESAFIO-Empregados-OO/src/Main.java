@@ -21,12 +21,14 @@ public class Main {
         System.out.print("Quantos funcionários tem o departamento? ");
         int numEmployees = scanner.nextInt();
 
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>(numEmployees);
 
         for (int i = 0; i < numEmployees; i++) {
             System.out.println("Dados do funcionário " + (i + 1) + ":");
             System.out.print("Nome: ");
             String name = scanner.next();
+
+            scanner.nextLine(); // limpa o buffer do teclado
 
             System.out.print("Salário: ");
             double salary = scanner.nextDouble();
@@ -37,21 +39,10 @@ public class Main {
 
         scanner.close();
 
-
         Address address = new Address(email, phoneNumber);
 
         Department department = new Department(departmentName, paymentDay, address, employees);
 
-        System.out.println("FOLHA DE PAGAMENTO:");
-        System.out.println("Departamento " + department.getName() + " = R$ " + department.payroll());
-        System.out.println("Pagamento realizado no dia " + department.getPayDay());
-        System.out.println("Funcionários:");
-        for (Employee employee : department.getEmployees()) {
-            System.out.println(employee.getName());
-        }
-        System.out.println("Para dúvidas favor entrar em contato: " + address);
-
-        System.out.println("Relatório completo:");
-        System.out.println(department);
+        Department.showReport(department);
     }
 }

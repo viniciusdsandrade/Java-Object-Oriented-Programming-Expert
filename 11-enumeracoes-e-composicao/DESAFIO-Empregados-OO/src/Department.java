@@ -2,10 +2,10 @@ import java.util.List;
 
 public class Department {
 
-    private String name;
-    private int payDay;
-    private Address address;
-    private List<Employee> employees;
+    private final String name;
+    private final int payDay;
+    private final Address address;
+    private final List<Employee> employees;
 
     public Department(String name, int payDay, Address address, List<Employee> employees) {
         this.name = name;
@@ -13,11 +13,6 @@ public class Department {
         this.address = address;
         this.employees = employees;
     }
-
-    public Department(){
-
-    }
-
 
     private void addEmployee(Employee employee) {
         employees.add(employee);
@@ -51,15 +46,14 @@ public class Department {
         return employees;
     }
 
-    private static void showReport(Department department) {
-        System.out.println("Department: " + department.name);
-        System.out.println("Payroll: " + department.payroll());
-        System.out.println("Payday: " + department.payDay);
-        System.out.println("Address: " + department.address);
-        System.out.println("Employees: ");
-        for (Employee employee : department.employees) {
-            System.out.println(employee.getName() + " - " + employee.getSalary());
+    static void showReport(Department department) {
+        System.out.println("\nFOLHA DE PAGAMENTO:");
+        System.out.println("Departamento " + department.getName() + " = R$ " + department.payroll());
+        System.out.println("Pagamento realizado no dia " + department.getPayDay());
+        System.out.println("Funcionários:");
+        for (Employee employee : department.getEmployees()) {
+            System.out.println(employee.getName());
         }
-        System.out.println("Para dúvidas favor entrar em contato: " + department.address);
+        System.out.println("Para dúvidas favor entrar em contato: \n" + department.getAddress());
     }
 }
