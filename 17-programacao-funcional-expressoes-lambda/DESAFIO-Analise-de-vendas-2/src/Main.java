@@ -3,16 +3,23 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        String filePath = null;
         try {
-            String filePath = "C:\\Users\\Pichau\\Desktop\\java-spring-ultimate\\nelio-object-oriented-programing\\Java-Object-Oriented-Programming-Expert\\17-programacao-funcional-expressoes-lambda\\base-de-dados\\base-de-dados.csv";
+            Scanner sc = new Scanner(System.in);
+            System.out.print("\nEntre com o caminho do arquivo: ");
+            filePath = sc.next();
+            //filePath = "C:\\Users\\Pichau\\Desktop\\java-spring-ultimate\\nelio-object-oriented-programing\\Java-Object-Oriented-Programming-Expert\\17-programacao-funcional-expressoes-lambda\\base-de-dados\\base-de-dados.csv";
+
             Map<String, Double> totalSalesBySeller = calculateTotalSalesBySeller(filePath);
-            
+
             displayTotalSalesBySeller(totalSalesBySeller);
+            sc.close();
         } catch (IOException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.printf("Erro: %s (O sistema não pode encontrar o arquivo especificado)", filePath);
         }
     }
 

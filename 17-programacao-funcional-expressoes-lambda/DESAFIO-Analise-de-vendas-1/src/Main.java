@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        String filePath = null;
         try {
-            String filePath = "C:\\Users\\Pichau\\Desktop\\java-spring-ultimate\\nelio-object-oriented-programing\\Java-Object-Oriented-Programming-Expert\\17-programacao-funcional-expressoes-lambda\\base-de-dados\\base-de-dados.csv";
+            Scanner sc = new Scanner(System.in);
+            System.out.print("\nEntre o caminho do arquivo: ");
+            //String filePath = "C:\\Users\\Pichau\\Desktop\\java-spring-ultimate\\nelio-object-oriented-programing\\Java-Object-Oriented-Programming-Expert\\17-programacao-funcional-expressoes-lambda\\base-de-dados\\base-de-dados.csv";
+            filePath = sc.next();
             List<Sale> sales = readSalesFromCsv(filePath);
 
             // Análise 1: Cinco primeiras vendas de 2016 de maior preço médio
@@ -19,8 +24,10 @@ public class Main {
 
             // Análise 2: Valor total vendido pelo vendedor Logan nos meses 1 e 7 de qualquer ano
             analyzeTotalSalesBySeller(sales, "Logan", 1, 7);
+            sc.close();
         } catch (IOException e) {
-            System.out.println(STR."Erro: \{e.getMessage()}");
+            //Erro: c:\temp\in (O sistema não pode encontrar o arquivo especificado)
+            System.out.printf("Erro: %s (O sistema não pode encontrar o arquivo especificado)", filePath);
         }
     }
 
