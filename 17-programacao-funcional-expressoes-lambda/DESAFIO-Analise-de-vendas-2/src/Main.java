@@ -46,9 +46,9 @@ public class Main {
 
     private static void displayTotalSalesBySeller(Map<String, Double> totalSalesBySeller) {
         System.out.println("Total de vendas por vendedor:");
-        Set<Map.Entry<String, Double>> entries = totalSalesBySeller.entrySet();
-        for (Map.Entry<String, Double> entry : entries) {
-            System.out.printf("%s - R$ %.2f%n", entry.getKey(), entry.getValue());
-        }
+
+        totalSalesBySeller.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .forEach(entry -> System.out.printf("%s - R$ %.2f%n", entry.getKey(), entry.getValue()));
     }
 }
