@@ -1,0 +1,30 @@
+Laptop,1200.00
+Smartwatch,300.00
+Camera,450.00
+Headphones,150.00
+Gaming Console,600.00
+Fitness Tracker,80.00
+4K TV,900.00
+Bluetooth Speaker,70.00
+External Hard Drive,120.00
+Graphics Card,800.00
+Wireless Mouse,40.00
+Virtual Reality Headset,500.00
+Printers,200.00
+Home Security Camera System,350.00
+Wireless Router,80.00
+Smart Thermostat,120.00
+Electric Toothbrush,50.00
+Air Purifier,180.00
+Smartphone,700.00
+Tablet Stand,20.00
+Noise-Canceling Earbuds,100.00
+Coffee Maker,80.00
+Robot Vacuum,250.00
+Bluetooth Keyboard,60.00
+Portable Projector,150.00
+Drones,400.00
+Smart Light Bulbs,30.00
+Power Bank,50.00
+Monitor Stand,25.00
+Ergonomic Chair,200.00
