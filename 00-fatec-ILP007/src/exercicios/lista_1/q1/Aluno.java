@@ -7,23 +7,29 @@ import static exercicios.deepCopy.ShallowOrDeepCopy.verifyAndCopy;
 /*
 Escreva uma classe cujos objetos representam alunos matriculados em uma disciplina. Cada objeto
 dessa classe deve guardar os seguintes dados do aluno:
-    * matrícula,
-    * nome,
-    * 2 notas de prova e
-    * 1 nota de trabalho.
+    1 - matrícula,
+    2 - nome,
+    3 -  2 notas de prova e
+    4 - 1 nota de trabalho.
 
 Escreva os seguintes métodos para esta classe:
- 1 - media calcula a média final do aluno (cada prova tem peso 2,5 e o trabalho tem peso 2)
- 2 - final calcula quanto o aluno precisa para a prova final (retorna zero se ele não for para a final)
+     1 - media calcula a média final do aluno (cada prova tem peso 2,5 e o trabalho tem peso 2)
+     2 - final calcula quanto o aluno precisa para a prova final (retorna zero se ele não for para a final)
  */
-
 public class Aluno implements Cloneable {
 
     private String matricula;
     private String nome;
     private double notaProva1, notaProva2, notaTrabalho;
 
+    public Aluno() {
+    }
+
     public Aluno(String matricula, String nome) {
+
+        if (matricula == null || matricula.isEmpty())
+            throw new IllegalArgumentException("A matrícula não pode ser nula ou vazia.");
+
         this.matricula = matricula;
         this.nome = nome;
     }
@@ -33,6 +39,22 @@ public class Aluno implements Cloneable {
                  double notaProva1,
                  double notaProva2,
                  double notaTrabalho) {
+
+        if (notaProva1 < 0 || notaProva1 > 10)
+            throw new IllegalArgumentException("A nota da prova 1 deve estar entre 0 e 10.");
+
+        if (notaProva2 < 0 || notaProva2 > 10)
+            throw new IllegalArgumentException("A nota da prova 2 deve estar entre 0 e 10.");
+
+        if (notaTrabalho < 0 || notaTrabalho > 10)
+            throw new IllegalArgumentException("A nota do trabalho deve estar entre 0 e 10.");
+
+        if (matricula == null || matricula.isEmpty())
+            throw new IllegalArgumentException("A matrícula não pode ser nula ou vazia.");
+
+        if (nome == null || nome.isEmpty())
+            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
+
         this.matricula = matricula;
         this.nome = nome;
         this.notaProva1 = notaProva1;
@@ -121,6 +143,18 @@ public class Aluno implements Cloneable {
     }
 
     @Override
+    public Aluno clone() {
+
+        Aluno clone = null;
+        try {
+            clone = new Aluno(this);
+        } catch (Exception ignored) {
+        }
+
+        return clone;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int hash = 1;
@@ -160,17 +194,5 @@ public class Aluno implements Cloneable {
                 "  \"notaProva2\": " + this.notaProva2 + ",\n" +
                 "  \"notaTrabalho\": " + this.notaTrabalho + "\n" +
                 "}";
-    }
-
-    @Override
-    public Aluno clone() {
-
-        Aluno clone = null;
-        try {
-            clone = new Aluno(this);
-        } catch (Exception ignored) {
-        }
-
-        return clone;
     }
 }

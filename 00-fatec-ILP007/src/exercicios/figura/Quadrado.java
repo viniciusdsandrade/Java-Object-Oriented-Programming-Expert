@@ -5,7 +5,6 @@ public class Quadrado extends Poligono {
     private final double tamanhoLado;
     private static final int NUMERO_DE_LADOS = 4;
 
-
     public Quadrado(int numeroLados, double tamanhoLado) {
         super(NUMERO_DE_LADOS);
         this.tamanhoLado = tamanhoLado;

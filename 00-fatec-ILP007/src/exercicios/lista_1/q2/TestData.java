@@ -5,6 +5,8 @@ import static exercicios.lista_1.q2.Data.isValidDate;
 public class TestData {
     public static void main(String[] args) {
 
+        Data data_vazia = new Data();
+
         //Data data = new Data((byte) 15, (byte) 10, (short) 1582);
         Data data = new Data((byte) 15, (byte) 3, (short) 2024);
 

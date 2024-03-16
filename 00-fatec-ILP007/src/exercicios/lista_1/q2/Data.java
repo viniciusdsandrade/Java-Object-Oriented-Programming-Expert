@@ -1,23 +1,22 @@
 package exercicios.lista_1.q2;
 /*
-
 Escreva uma classe Data cuja instância (objeto) represente uma data.
 
 Esta classe deverá dispor dos seguintes métodos:
-1 - construtor define a data que determinado objeto (por parâmetro), este método verifica se a
-    data está correta, caso não esteja a data é configurada como 01/01/0001
-    compara recebe como parâmetro outro objeto da Classe data, compare com a data corrente e
-    retorne:
-        0  se as datas forem iguais;
-        1  se a data corrente for maior que a do parâmetro;
-        -1 se a data do parâmetro for maior que a corrente.
-2 - getDia retorna o dia da data
-3 - getMes retorna o mês da data
-4 - getMesExtenso retorna o mês da data corrente por extenso
-5 - getAno retorna o ano da data
-6 - isBissexto retorna verdadeiro se o ano da data corrente for bissexto e falso caso contrário
-7 - clone o objeto clona a si próprio, para isto, ele cria um novo objeto da classe Data com os
-    mesmos valores de atributos e retorna sua referência pelo método
+    1 - construtor define a data que determinado objeto (por parâmetro), este método verifica se a
+        data está correta, caso não esteja a data é configurada como 01/01/0001
+        compara recebe como parâmetro outro objeto da Classe data, compare com a data corrente e
+        retorne:
+            0  se as datas forem iguais;
+            1  se a data corrente for maior que a do parâmetro;
+            -1 se a data do parâmetro for maior que a corrente.
+    2 - getDia retorna o dia da data
+    3 - getMes retorna o mês da data
+    4 - getMesExtenso retorna o mês da data corrente por extenso
+    5 - getAno retorna o ano da data
+    6 - isBissexto retorna verdadeiro se o ano da data corrente for bissexto e falso caso contrário
+    7 - clone o objeto clona a si próprio, para isto, ele cria um novo objeto da classe Data com os
+        mesmos valores de atributos e retorna sua referência pelo método
  */
 
 import java.util.Objects;
@@ -38,6 +37,9 @@ public class Data implements Comparable<Data>, Cloneable {
         this.ano = ano;
     }
 
+    public Data() {
+    }
+
     public static boolean isValidDate(byte dia, byte mes, short ano) {
         if (dia < 1 || dia > 31) return false;
         if (mes < 1 || mes > 12) return false;
@@ -46,6 +48,45 @@ public class Data implements Comparable<Data>, Cloneable {
         if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) return false;
         if (mes == 2 && dia > 29) return false;
         return mes != 2 || dia != 29 || isBissexto(ano);
+    }
+
+    private static boolean isBissexto(short ano) {
+        if (ano < 1583) return ano % 4 == 0;
+        if (ano % 400 == 0) return true;
+        return ano % 4 == 0 && ano % 100 != 0;
+    }
+
+    public byte getDia() {
+        return dia;
+    }
+
+    public byte getMes() {
+        return mes;
+    }
+
+    public short getAno() {
+        return ano;
+    }
+
+    public void setDia(byte dia) {
+        if (!isValidDate(dia, this.mes, this.ano))
+            throw new IllegalArgumentException("O dia não é válido.");
+
+        this.dia = dia;
+    }
+
+    public void setMes(byte mes) {
+        if (!isValidDate(this.dia, mes, this.ano))
+            throw new IllegalArgumentException("O mês não é válido.");
+
+        this.mes = mes;
+    }
+
+    public void setAno(short ano) {
+        if (!isValidDate(this.dia, this.mes, ano))
+            throw new IllegalArgumentException("O ano não é válido.");
+
+        this.ano = ano;
     }
 
     public String diaDaSemana() {
@@ -94,43 +135,80 @@ public class Data implements Comparable<Data>, Cloneable {
         return days;
     }
 
-    private static boolean isBissexto(short ano) {
-        if (ano < 1583) return ano % 4 == 0;
-        if (ano % 400 == 0) return true;
-        return ano % 4 == 0 && ano % 100 != 0;
+    public String getDiaDoAno() {
+        int dia = this.dia;
+        int mes = this.mes;
+        int ano = this.ano;
+
+        if (mes == 1 || mes == 2) {
+            mes += 12;
+            ano--;
+        }
+
+        int k = ano % 100;
+        int j = ano / 100;
+
+        int diaDaSemana = (dia + (13 * (mes + 1)) / 5 + k + (k / 4) + (j / 4) - (2 * j)) % 7;
+
+        int dias = 0;
+        for (int i = 1; i < mes; i++) {
+            if (i == 2) {
+                if (isBissexto((short) ano)) {
+                    dias += 29;
+                } else {
+                    dias += 28;
+                }
+            } else if (i == 4 || i == 6 || i == 9 || i == 11) {
+                dias += 30;
+            } else {
+                dias += 31;
+            }
+        }
+        dias += dia;
+
+        if (isBissexto((short) ano)) {
+            dias += 1;
+        }
+
+        return "Dia " + dias;
     }
 
-    public byte getDia() {
-        return dia;
-    }
+    public String getSemanaDoAno() {
+        int dia = this.dia;
+        int mes = this.mes;
+        int ano = this.ano;
 
-    public byte getMes() {
-        return mes;
-    }
+        if (mes == 1 || mes == 2) {
+            mes += 12;
+            ano--;
+        }
 
-    public short getAno() {
-        return ano;
-    }
+        int k = ano % 100;
+        int j = ano / 100;
 
-    public void setDia(byte dia) {
-        if (!isValidDate(dia, this.mes, this.ano))
-            throw new IllegalArgumentException("O dia não é válido.");
+        int diaDaSemana = (dia + (13 * (mes + 1)) / 5 + k + (k / 4) + (j / 4) - (2 * j)) % 7;
 
-        this.dia = dia;
-    }
+        int dias = 0;
+        for (int i = 1; i < mes; i++) {
+            if (i == 2) {
+                if (isBissexto((short) ano)) {
+                    dias += 29;
+                } else {
+                    dias += 28;
+                }
+            } else if (i == 4 || i == 6 || i == 9 || i == 11) {
+                dias += 30;
+            } else {
+                dias += 31;
+            }
+        }
+        dias += dia;
 
-    public void setMes(byte mes) {
-        if (!isValidDate(this.dia, mes, this.ano))
-            throw new IllegalArgumentException("O mês não é válido.");
+        if (isBissexto((short) ano)) {
+            dias += 1;
+        }
 
-        this.mes = mes;
-    }
-
-    public void setAno(short ano) {
-        if (!isValidDate(this.dia, this.mes, ano))
-            throw new IllegalArgumentException("O ano não é válido.");
-
-        this.ano = ano;
+        return "Semana " + ((dias + diaDaSemana - 1) / 7 + 1);
     }
 
     public String getMesPorExtenso() {
@@ -170,6 +248,27 @@ public class Data implements Comparable<Data>, Cloneable {
         }
     }
 
+    public void avanceUmaSemana() {
+        avanceDias(7);
+    }
+
+    public void avanceUmMes() {
+        if (isValidDate(this.dia, (byte) (this.mes + 1), this.ano)) {
+            this.mes++;
+        } else {
+            this.mes = 1;
+            this.ano++;
+        }
+    }
+
+    public void avanceUmAno() {
+        if (isValidDate(this.dia, this.mes, (short) (this.ano + 1))) {
+            this.ano++;
+        } else {
+            this.ano = 1;
+        }
+    }
+
     public void retrocedaUmDia() {
         if (this.dia == 15 && this.mes == 10 && this.ano == 1582) {
             this.dia = 4;
@@ -195,6 +294,27 @@ public class Data implements Comparable<Data>, Cloneable {
         }
     }
 
+    public void retrocedaUmaSemana() {
+        retrocedaDias(7);
+    }
+
+    public void retrocedaUmMes() {
+        if (isValidDate(this.dia, (byte) (this.mes - 1), this.ano)) {
+            this.mes--;
+        } else {
+            this.mes = 12;
+            this.ano--;
+        }
+    }
+
+    public void retrocedaUmAno() {
+        if (isValidDate(this.dia, this.mes, (short) (this.ano - 1))) {
+            this.ano--;
+        } else {
+            this.ano = 1;
+        }
+    }
+
     public void avanceDias(int dias) {
         if (dias < 0) throw new IllegalArgumentException("O número de dias não pode ser negativo.");
 
@@ -204,12 +324,48 @@ public class Data implements Comparable<Data>, Cloneable {
         }
     }
 
+    public void avanceMeses(int meses) {
+        if (meses < 0) throw new IllegalArgumentException("O número de meses não pode ser negativo.");
+
+        while (meses > 0) {
+            avanceUmMes();
+            meses--;
+        }
+    }
+
+    public void avanceAnos(int anos) {
+        if (anos < 0) throw new IllegalArgumentException("O número de anos não pode ser negativo.");
+
+        while (anos > 0) {
+            avanceUmAno();
+            anos--;
+        }
+    }
+
     public void retrocedaDias(int dias) {
         if (dias < 0) throw new IllegalArgumentException("O número de dias não pode ser negativo.");
 
         while (dias > 0) {
             retrocedaUmDia();
             dias--;
+        }
+    }
+
+    public void retrocedaMeses(int meses) {
+        if (meses < 0) throw new IllegalArgumentException("O número de meses não pode ser negativo.");
+
+        while (meses > 0) {
+            retrocedaUmMes();
+            meses--;
+        }
+    }
+
+    public void retrocedaAnos(int anos) {
+        if (anos < 0) throw new IllegalArgumentException("O número de anos não pode ser negativo.");
+
+        while (anos > 0) {
+            retrocedaUmAno();
+            anos--;
         }
     }
 
@@ -236,6 +392,42 @@ public class Data implements Comparable<Data>, Cloneable {
                 }
             }
         }
+        return ret;
+    }
+
+    public Data getSemanaSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceDias(7);
+        return ret;
+    }
+
+    public Data getMesSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceUmMes();
+        return ret;
+    }
+
+    public Data getAnoSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceUmAno();
+        return ret;
+    }
+
+    public Data getDecadaSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceAnos(10);
+        return ret;
+    }
+
+    public Data getSeculoSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceAnos(100);
+        return ret;
+    }
+
+    public Data getMilenioSeguinte() {
+        Data ret = new Data(this);
+        ret.avanceAnos(1000);
         return ret;
     }
 
@@ -286,6 +478,36 @@ public class Data implements Comparable<Data>, Cloneable {
             }
         }
 
+        return ret;
+    }
+
+    public Data getSemanaAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaDias(7);
+        return ret;
+    }
+
+    public Data getMesAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaUmMes();
+        return ret;
+    }
+
+    public Data getAnoAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaUmAno();
+        return ret;
+    }
+
+    public Data getDecadaAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaAnos(10);
+        return ret;
+    }
+
+    public Data getSeculoAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaAnos(100);
         return ret;
     }
 
