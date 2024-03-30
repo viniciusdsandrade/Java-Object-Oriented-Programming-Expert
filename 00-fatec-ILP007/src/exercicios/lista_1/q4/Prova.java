@@ -97,6 +97,7 @@ public class Prova implements Cloneable, Comparable<Prova> {
 
         this.gabarito = (Gabarito) verifyAndCopy(modelo.gabarito);
         this.questaoAtual = (int) verifyAndCopy(modelo.questaoAtual);
+
         for (int i = 0; i < 15; i++)
             this.respostasAluno[i] = (char) verifyAndCopy(modelo.respostasAluno[i]);
     }

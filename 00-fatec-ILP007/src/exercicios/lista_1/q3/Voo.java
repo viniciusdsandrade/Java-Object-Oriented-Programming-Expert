@@ -34,15 +34,9 @@ public class Voo implements Cloneable, Comparable<Voo> {
 
     public Voo(int numeroVoo, Data data, int lotacao) {
 
-        if (lotacao < 0)
-            throw new IllegalArgumentException("Lotação do voo não pode ser negativa");
-
-        if (lotacao > 100)
-            throw new IllegalArgumentException("Lotação do voo não pode ser maior que 100");
-
-        if (numeroVoo < 0)
-            throw new IllegalArgumentException("Número do voo não pode ser negativo");
-
+        if (lotacao < 0) throw new IllegalArgumentException("Lotação do voo não pode ser negativa");
+        if (lotacao > 100) throw new IllegalArgumentException("Lotação do voo não pode ser maior que 100");
+        if (numeroVoo < 0) throw new IllegalArgumentException("Número do voo não pode ser negativo");
         if (!isValidDate(data.getDia(), data.getMes(), data.getAno()))
             throw new IllegalArgumentException("Data inválida");
 
@@ -56,9 +50,7 @@ public class Voo implements Cloneable, Comparable<Voo> {
 
     public Voo(int numeroVoo, Data data) {
 
-        if (numeroVoo < 0)
-            throw new IllegalArgumentException("Número do voo não pode ser negativo");
-
+        if (numeroVoo < 0) throw new IllegalArgumentException("Número do voo não pode ser negativo");
         if (!isValidDate(data.getDia(), data.getMes(), data.getAno()))
             throw new IllegalArgumentException("Data inválida");
 
@@ -97,6 +89,10 @@ public class Voo implements Cloneable, Comparable<Voo> {
     }
 
     public void ocupa(int cadeira) {
+
+        if (cadeira < 0 || cadeira >= cadeiras.length)
+            throw new IllegalArgumentException("Cadeira inválida");
+
         if (cadeiras[cadeira]) return;
 
         cadeiras[cadeira] = true;
@@ -136,17 +132,16 @@ public class Voo implements Cloneable, Comparable<Voo> {
         this.numeroVoo = numeroVoo;
     }
 
-    public Voo(Voo copia) {
+    public Voo(Voo modelo) {
 
-        if (copia == null) throw new IllegalArgumentException("Voo não pode ser nulo");
+        if (modelo == null) throw new IllegalArgumentException("Voo não pode ser nulo");
 
-        this.numeroVoo = (int) verifyAndCopy(copia.numeroVoo);
-        this.data = (Data) verifyAndCopy(copia.data);
-        this.cadeiras = new boolean[copia.cadeiras.length];
+        this.numeroVoo = (int) verifyAndCopy(modelo.numeroVoo);
+        this.data = (Data) verifyAndCopy(modelo.data);
+        this.cadeiras = new boolean[modelo.cadeiras.length];
 
-        for (int i = 0; i < copia.cadeiras.length; i++) {
-            this.cadeiras[i] = copia.cadeiras[i];
-        }
+        for (int i = 0; i < modelo.cadeiras.length; i++)
+            this.cadeiras[i] = (boolean) verifyAndCopy(modelo.cadeiras[i]);
     }
 
     public Object clone() {
@@ -167,12 +162,11 @@ public class Voo implements Cloneable, Comparable<Voo> {
         int hash = 1;
 
         hash *= prime + Integer.hashCode(numeroVoo);
-        hash *= prime + data.hashCode();
+        hash *= prime + Objects.hashCode(data);
         hash *= prime + Integer.hashCode(cadeiras.length);
 
-        for (int i = 0; i < cadeiras.length; i++) {
-            hash *= prime + (cadeiras[i] ? 1 : 0);
-        }
+        for (boolean cadeira : cadeiras)
+            hash *= prime + (cadeira ? 1 : 0);
 
         if (hash < 0) hash *= -1;
 
@@ -187,9 +181,9 @@ public class Voo implements Cloneable, Comparable<Voo> {
 
         Voo that = (Voo) o;
 
-        for (int i = 0; i < this.cadeiras.length; i++) {
-            if (this.cadeiras[i] != that.cadeiras[i]) return false;
-        }
+        for (int i = 0; i < this.cadeiras.length; i++)
+            if (this.cadeiras[i] != that.cadeiras[i])
+                return false;
 
         return Objects.equals(this.numeroVoo, that.numeroVoo) &&
                 Objects.equals(this.data, that.data) &&

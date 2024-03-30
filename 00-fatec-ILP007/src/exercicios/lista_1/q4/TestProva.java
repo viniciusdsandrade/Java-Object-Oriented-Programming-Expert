@@ -25,7 +25,6 @@ public class TestProva {
         System.out.println("copia: " + prova2);
         System.out.println("clone: " + prova3);
 
-
         System.out.println("copia.hashCode() = " + prova2.hashCode());
         System.out.println("clone.hashCode() = " + prova3.hashCode());
         System.out.println("prova.hashCode() = " + prova.hashCode());

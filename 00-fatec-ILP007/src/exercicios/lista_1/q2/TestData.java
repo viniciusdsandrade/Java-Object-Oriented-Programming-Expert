@@ -5,13 +5,46 @@ import static exercicios.lista_1.q2.Data.isValidDate;
 public class TestData {
     public static void main(String[] args) {
 
-        Data data_vazia = new Data();
-
-        //Data data = new Data((byte) 15, (byte) 10, (short) 1582);
-        Data data = new Data((byte) 15, (byte) 3, (short) 2024);
-
         Data meuNascimento = new Data((byte) 6, (byte) 12, (short) 2001);
         System.out.println("Meu nascimento: " + meuNascimento);
+        System.out.println("Dia da semana:  " + meuNascimento.diaDaSemana());
+        System.out.println("Dia do ano:     " + meuNascimento.getDiaDoAno());
+        System.out.println("Semana do ano:  " + meuNascimento.getSemanaDoAno());
+        System.out.println("Mês do ano:     " + meuNascimento.getMesPorExtenso());
+
+        System.out.println();
+        System.out.println("Dia anterior:  " + meuNascimento.getDiaAnterior());
+        System.out.println("Dia posterior: " + meuNascimento.getDiaSeguinte());
+
+        System.out.println();
+        System.out.println("semana anterior:  " + meuNascimento.getSemanaAnterior());
+        System.out.println("semana posterior: " + meuNascimento.getSemanaSeguinte());
+
+        System.out.println();
+        System.out.println("Mês anterior:  " + meuNascimento.getMesAnterior());
+        System.out.println("Mês posterior: " + meuNascimento.getMesSeguinte());
+
+        System.out.println();
+        System.out.println("Ano anterior:  " + meuNascimento.getAnoAnterior());
+        System.out.println("Ano posterior: " + meuNascimento.getAnoSeguinte());
+
+        System.out.println();
+        System.out.println("Decada anterior:  " + meuNascimento.getDecadaAnterior());
+        System.out.println("Decada posterior: " + meuNascimento.getDecadaSeguinte());
+
+        System.out.println();
+        System.out.println("Século anterior:  " + meuNascimento.getSeculoAnterior());
+        System.out.println("Século posterior: " + meuNascimento.getSeculoSeguinte());
+
+        System.out.println();
+        System.out.println("Milênio anterior:  " + meuNascimento.getMilenioAnterior());
+        System.out.println("Milênio posterior: " + meuNascimento.getMilenioSeguinte());
+
+        System.out.println();
+        Data data_vazia = new Data();
+        System.out.println("Data vazia: " + data_vazia);
+
+        Data data = new Data((byte) 18, (byte) 3, (short) 2024);
 
         String diaDaSemana = meuNascimento.diaDaSemana();
         int diff = data.diferencaEmDias(meuNascimento);
@@ -66,11 +99,5 @@ public class TestData {
         System.out.println("data1 =         " + data1);
         System.out.println("data2 (copy)  = " + data2);
         System.out.println("data3 (clone) = " + data3);
-
-        Data data4 = data1.getDiaSeguinte();
-        System.out.println("\npróximo dia de data1 =    " + data4);
-
-        Data data5 = data1.getDiaAnterior();
-        System.out.println("\ndia anterior de data1 =   " + data5);
     }
 }

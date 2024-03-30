@@ -14,7 +14,6 @@ public class Pessoa implements Cloneable {
         this.endereco = pessoa.getEndereco();
     }
 
-
     public Pessoa(String nome, String endereco) {
         this.nome = nome;
         this.endereco = endereco;
@@ -33,11 +32,11 @@ public class Pessoa implements Cloneable {
         this.endereco = endereco;
     }
 
-    public Pessoa(Pessoa copia) {
-        if (copia == null) throw new IllegalArgumentException("Cópia não pode ser nula");
+    public Pessoa(Pessoa modelo) {
+        if (modelo == null) throw new IllegalArgumentException("Cópia não pode ser nula");
 
-        this.nome = (String) verifyAndCopy(copia.nome);
-        this.endereco = (String) verifyAndCopy(copia.endereco);
+        this.nome = (String) verifyAndCopy(modelo.nome);
+        this.endereco = (String) verifyAndCopy(modelo.endereco);
     }
 
     @Override

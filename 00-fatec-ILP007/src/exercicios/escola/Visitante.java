@@ -3,6 +3,8 @@ package exercicios.escola;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static exercicios.deepCopy.ShallowOrDeepCopy.verifyAndCopy;
+
 public class Visitante extends PessoaFisica {
 
     private LocalDateTime inicioVisita;
@@ -33,6 +35,21 @@ public class Visitante extends PessoaFisica {
 
     public void setFimVisita(LocalDateTime fimVisita) {
         this.fimVisita = fimVisita;
+    }
+
+    public Visitante(Visitante modelo) {
+        super(modelo);
+
+        if (modelo == null) throw new IllegalArgumentException("Cópia não pode ser nula");
+
+        super.setNome((String) verifyAndCopy(modelo.getNome()));
+        super.setEndereco((String) verifyAndCopy(modelo.getEndereco()));
+        super.setCpf((String) verifyAndCopy(modelo.getCpf()));
+        super.setRg((String) verifyAndCopy(modelo.getRg()));
+
+
+        this.inicioVisita = modelo.inicioVisita;
+        this.fimVisita = modelo.fimVisita;
     }
 
     @Override

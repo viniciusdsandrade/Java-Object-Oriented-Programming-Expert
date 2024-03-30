@@ -13,7 +13,22 @@ public class Professor extends PessoaFisica implements Cloneable {
     private LocalDate dataAdmissao;
     private String titulacao;
     private BigDecimal salario;
-    private List<String> disciplinas = new ArrayList<>();
+    private List<String> disciplinas;
+
+    public Professor(String nome,
+                     String endereco,
+                     String cpf,
+                     String rg,
+                     LocalDate dataAdmissao,
+                     String titulacao,
+                     BigDecimal salario,
+                     List<String> disciplinas) {
+        super(nome, endereco, cpf, rg);
+        this.dataAdmissao = dataAdmissao;
+        this.titulacao = titulacao;
+        this.salario = salario;
+        this.disciplinas = new ArrayList<>(disciplinas);
+    }
 
     public Professor(String nome,
                      String endereco,
@@ -30,7 +45,7 @@ public class Professor extends PessoaFisica implements Cloneable {
     }
 
     public void addDisciplina(String disciplina) {
-        disciplinas.add(disciplina);
+        this.disciplinas.add(disciplina);
     }
 
     public void addDisciplinas(List<String> disciplinas) {
@@ -65,17 +80,20 @@ public class Professor extends PessoaFisica implements Cloneable {
         return disciplinas;
     }
 
-    public Professor(Professor copia) {
-        super(copia);
+    public Professor(Professor modelo) {
+        super(modelo);
 
-        super.setNome((String) verifyAndCopy(copia.getNome()));
-        super.setEndereco((String) verifyAndCopy(copia.getEndereco()));
-        super.setCpf((String) verifyAndCopy(copia.getCpf()));
-        super.setRg((String) verifyAndCopy(copia.getRg()));
-        this.dataAdmissao = (LocalDate) verifyAndCopy(copia.dataAdmissao);
-        this.titulacao = (String) verifyAndCopy(copia.titulacao);
-        this.salario = (BigDecimal) verifyAndCopy(copia.salario);
-        this.disciplinas.addAll(copia.disciplinas);
+        if (modelo == null) throw new IllegalArgumentException("Cópia não pode ser nula");
+
+        super.setNome((String) verifyAndCopy(modelo.getNome()));
+        super.setEndereco((String) verifyAndCopy(modelo.getEndereco()));
+        super.setCpf((String) verifyAndCopy(modelo.getCpf()));
+        super.setRg((String) verifyAndCopy(modelo.getRg()));
+
+        this.dataAdmissao = (LocalDate) verifyAndCopy(modelo.dataAdmissao);
+        this.titulacao = (String) verifyAndCopy(modelo.titulacao);
+        this.salario = (BigDecimal) verifyAndCopy(modelo.salario);
+        this.disciplinas = new ArrayList<>(modelo.disciplinas);
     }
 
     @Override

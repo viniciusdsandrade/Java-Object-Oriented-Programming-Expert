@@ -4,6 +4,9 @@ import exercicios.lista_1.q2.Data;
 import exercicios.lista_1.q3.Voo;
 
 import java.util.Arrays;
+import java.util.Objects;
+
+import static exercicios.deepCopy.ShallowOrDeepCopy.verifyAndCopy;
 
 /*
 Escreva uma classe herdeira à voo criada na lista de exercícios anterior,
@@ -24,7 +27,7 @@ Para isto esta classe deve acrescentar os atributos necessários e adicionar os 
     Os métodos proximoLivre, verifica e ocupa da superclasse devem ser adaptados para tratar o número
     máximo de vagas informado, ao invés do número fixo de 100.
  */
-public class Voo2 extends Voo {
+public class Voo2 extends Voo implements Cloneable {
 
     private int numeroVoo;
     private Data data;
@@ -41,25 +44,21 @@ public class Voo2 extends Voo {
                 int maxVagas,
                 int cadeirasFumantes,
                 int cadeirasNaoFumantes) {
+
         super(numero, data);
 
-        if (maxVagas < 0)
-            throw new IllegalArgumentException("Lotação do voo não pode ser negativa");
-
-        if (maxVagas > 615)
-            throw new IllegalArgumentException("Lotação do voo não pode ser maior que 615");
-
+        if (maxVagas < 0) throw new IllegalArgumentException("Lotação do voo não pode ser negativa");
+        if (maxVagas > 615) throw new IllegalArgumentException("Lotação do voo não pode ser maior que 615");
         if (cadeirasFumantes < 0)
             throw new IllegalArgumentException("Número de cadeiras fumantes não pode ser negativo");
-
-        if (cadeirasFumantes > maxVagas)
-            throw new IllegalArgumentException("Número de cadeiras fumantes não pode ser maior que a lotação do voo");
-
         if (cadeirasNaoFumantes < 0)
             throw new IllegalArgumentException("Número de cadeiras não fumantes não pode ser negativo");
-
+        if (cadeirasFumantes > maxVagas)
+            throw new IllegalArgumentException("Número de cadeiras fumantes não pode ser maior que a lotação do voo");
         if (cadeirasNaoFumantes > maxVagas)
             throw new IllegalArgumentException("Número de cadeiras não fumantes não pode ser maior que a lotação do voo");
+        if (cadeirasFumantes + cadeirasNaoFumantes != maxVagas)
+            throw new IllegalArgumentException("A soma das cadeiras fumantes e não fumantes não pode ser maior que a lotação do voo");
 
         this.maxVagas = cadeirasFumantes + cadeirasNaoFumantes;
         this.cadeirasFumantes = cadeirasFumantes;
@@ -97,8 +96,7 @@ public class Voo2 extends Voo {
 
         if (isCadeiraFumante(cadeira))
             cadeirasFumantes--;
-
-        if (isCadeiraNaoFumante(cadeira))
+        else
             cadeirasNaoFumantes--;
 
         cadeiras[cadeira] = 'O';
@@ -132,12 +130,20 @@ public class Voo2 extends Voo {
 
     public void ocupaVagaNormal() {
         int cadeira = buscaPrimeiraCadeiraNaoFumante();
+
+        if (cadeira == -1)
+            throw new IllegalArgumentException("Não há mais cadeiras não fumantes disponíveis");
+
         cadeiras[cadeira] = 'O';
         this.cadeirasNaoFumantes--;
     }
 
     public void ocupaVagaFumante() {
         int cadeira = buscaPrimeiraCadeiraFumante();
+
+        if (cadeira == -1)
+            throw new IllegalArgumentException("Não há mais cadeiras fumantes disponíveis");
+
         cadeiras[cadeira] = 'O';
         this.cadeirasFumantes--;
     }
@@ -198,6 +204,76 @@ public class Voo2 extends Voo {
     @Override
     public int vagas() {
         return maxVagas - cadeirasOcupadas();
+    }
+
+    @Override
+    public Object clone() {
+        Voo2 clone = null;
+
+        try {
+            clone = new Voo2(this);
+        } catch (Exception ignored) {
+        }
+        return clone;
+    }
+
+    public Voo2(Voo2 original) {
+
+        if (original == null) throw new IllegalArgumentException("Modelo inválido");
+
+        this.numeroVoo = (int) verifyAndCopy(original.numeroVoo);
+        this.data = (Data) verifyAndCopy(original.data);
+        this.maxVagas = (int) verifyAndCopy(original.maxVagas);
+        this.cadeirasFumantes = (int) verifyAndCopy(original.cadeirasFumantes);
+        this.cadeirasNaoFumantes = (int) verifyAndCopy(original.cadeirasNaoFumantes);
+        this.cadeiras = null;
+
+        if (original.cadeiras != null) {
+            this.cadeiras = new char[original.cadeiras.length];
+            for (int i = 0; i < original.cadeiras.length; i++) {
+                this.cadeiras[i] = (char) verifyAndCopy(original.cadeiras[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+
+        Voo2 voo = (Voo2) obj;
+
+        for (int i = 0; i < maxVagas; i++) {
+            if (this.cadeiras[i] != voo.cadeiras[i])
+                return false;
+        }
+
+        return Objects.equals(this.data, voo.data) &&
+                Objects.equals(this.numeroVoo, voo.numeroVoo) &&
+                Objects.equals(this.maxVagas, voo.maxVagas) &&
+                Objects.equals(this.cadeirasFumantes, voo.cadeirasFumantes) &&
+                Objects.equals(this.cadeirasNaoFumantes, voo.cadeirasNaoFumantes);
+    }
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int hash = super.hashCode();
+
+        hash *= prime + Integer.hashCode(numeroVoo);
+        hash *= prime + Objects.hashCode(data);
+        hash *= prime + Integer.hashCode(maxVagas);
+        hash *= prime + Integer.hashCode(cadeirasFumantes);
+        hash *= prime + Integer.hashCode(cadeirasNaoFumantes);
+
+        for (int i = 0; i < maxVagas; i++)
+            hash *= prime + (int) cadeiras[i];
+
+        if (hash < 0) hash *= -1;
+
+        return hash;
     }
 
     @Override

@@ -39,6 +39,11 @@ public class Aluno extends PessoaFisica implements Cloneable {
     public Aluno(Aluno modelo) {
         super(modelo);
 
+        super.setNome((String) verifyAndCopy(modelo.getNome()));
+        super.setEndereco((String) verifyAndCopy(modelo.getEndereco()));
+        super.setCpf((String) verifyAndCopy(modelo.getCpf()));
+        super.setRg((String) verifyAndCopy(modelo.getRg()));
+
         this.matricula = (String) verifyAndCopy(modelo.matricula);
         this.curso = (String) verifyAndCopy(modelo.curso);
     }

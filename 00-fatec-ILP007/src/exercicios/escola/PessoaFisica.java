@@ -34,13 +34,16 @@ public class PessoaFisica extends Pessoa implements Cloneable {
         this.rg = rg;
     }
 
-    public PessoaFisica(PessoaFisica copia) {
-        super(copia);
+    public PessoaFisica(PessoaFisica modelo) {
+        super(modelo);
 
-        super.setNome((String) verifyAndCopy(copia.getNome()));
-        super.setEndereco((String) verifyAndCopy(copia.getEndereco()));
-        this.cpf = (String) verifyAndCopy(copia.cpf);
-        this.rg = (String) verifyAndCopy(copia.rg);
+        if (modelo == null) throw new IllegalArgumentException("Cópia não pode ser nula");
+
+        super.setNome((String) verifyAndCopy(modelo.getNome()));
+        super.setEndereco((String) verifyAndCopy(modelo.getEndereco()));
+
+        this.cpf = (String) verifyAndCopy(modelo.cpf);
+        this.rg = (String) verifyAndCopy(modelo.rg);
     }
 
     @Override

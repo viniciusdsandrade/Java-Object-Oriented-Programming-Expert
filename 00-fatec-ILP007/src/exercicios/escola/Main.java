@@ -9,10 +9,30 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Professor professorTest = new Professor(
+                "Vinícius dos Santos Andrade",
+                "Rua Orlando de Oliveira 375",
+                "447.840.608-76",
+                "50.562.905-7",
+                LocalDate.of(2021, 10, 10),
+                "50.562.905-7", new BigDecimal(1000),
+                List.of("Matemática", "Física", "Química")
+        );
+
+        System.out.println();
+
+        Professor professorTestClone = (Professor) professorTest.clone();
+        Professor professorTestCopy = new Professor(professorTest);
+        professorTest.addDisciplinas(List.of("Português", "Inglês", "Espanhol")); // "Matemática", "Física", "Química", "Português", "Inglês", "Espanhol
+
+        System.out.println("professorTest: " + professorTest);
+        System.out.println("professorTestClone: " + professorTestClone);
+        System.out.println("professorTestCopy: " + professorTestCopy);
+
         Pessoa pessoa = new Pessoa("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira");
         PessoaFisica pessoaFisica = new PessoaFisica("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7");
         PessoaJuridica pessoaJuridica = new PessoaJuridica("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7");
-        Professor professor = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000));
+        Professor professor = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000), List.of("Matemática", "Física", "Química"));
         Aluno aluno = new Aluno("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "50.562.905-7", "447.840.608-76", "22333", "Ciência da Computação");
         Visitante visitante = new Visitante("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7", LocalDateTime.of(2021, 10, 10, 10, 10), LocalDateTime.of(2021, 10, 10, 10, 10));
 
@@ -23,10 +43,10 @@ public class Main {
          */
         Pessoa pessoaFisicaToPessoa = new PessoaFisica("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7");
         Pessoa pessoaJuridicaToPessoa = new PessoaJuridica("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7");
-        Pessoa professorToPessoa = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000));
+        Pessoa professorToPessoa = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000), List.of("Matemática", "Física", "Química"));
         Pessoa alunoToPessoa = new Aluno("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "50.562.905-7", "447.840.608-76", "22333", "Ciência da Computação");
         Pessoa visitanteToPessoa = new Visitante("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7", LocalDateTime.of(2021, 10, 10, 10, 10), LocalDateTime.of(2021, 10, 10, 10, 10));
-        PessoaFisica professorToPessoaFisica = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000));
+        PessoaFisica professorToPessoaFisica = new Professor("Vinícius dos Santos Andrade", "Rua Orlando de Oliveira 375", "447.840.608-76", "50.562.905-7", LocalDate.of(2021, 10, 10), "50.562.905-7", new BigDecimal(1000), List.of("Matemática", "Física", "Química"));
         PessoaFisica alunoToPessoaFisica = new Aluno("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "50.562.905-7", "447.840.608-76", "22333", "Ciência da Computação");
         PessoaFisica visitanteToPessoaFisica = new Visitante("Arthur dos Santos Andrade", "Rua Orlando de Oliveira", "447.840.608-76", "50.562.905-7", LocalDateTime.of(2021, 10, 10, 10, 10), LocalDateTime.of(2021, 10, 10, 10, 10));
 

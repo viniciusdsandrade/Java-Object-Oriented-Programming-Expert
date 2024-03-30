@@ -1,8 +1,8 @@
 package exercicios.lista_2.q2;
-/*
-Dada uma classe Equipamento na qual cada objeto representa um conjunto de N equipamentos de
-uma empresa com seus respectivos valores, cujo diagrama UML está representado a seguir:
 
+/*
+Dada uma classe – Equipamento na qual cada objeto representa um conjunto de N equipamentos de
+uma empresa com seus respectivos valores, cujo diagrama UML está representado a seguir:
      1 - construtor recebe como parâmetro o número de equipamentos e cria um vetor de
          valores do respectivo tamanho
      2 - getNumeroEquipamentos retorna o número de equipamentos
@@ -10,13 +10,15 @@ uma empresa com seus respectivos valores, cujo diagrama UML está representado a
      4 - setValor recebe como parâmetro o número do equipamento e seu valor e o registra
 
     Cada equipamento possui um código numérico sequencial, começando de zero, que corresponde a sua
-        posição no vetor.
+    posição no vetor.
+
     Escreva uma classe, herdeira da classe Equipamento, denominada EquipamentoCorrigido em que cada
-        objeto representa os mesmos equipamentos com valor corrigido, conforme diagrama UML parcial
+    objeto representa os mesmos equipamentos com valor corrigido, conforme diagrama UML parcial
     representado anteriormente.
+
         Todos os equipamentos só são corrigidos anualmente no mês em que foi comprado, por este motivo a classe
         deve acrescentar para cada equipamento um registro do seu mês de compra. Além disto, deve possuir os
-métodos:
+        métodos:
      1 - construtor recebe como parâmetros o número de equipamentos e o mês corrente
      2 - getMesCompra recebe como parâmetro o número do equipamento (começando de zero) e retorna seu mês de compra
      3 - setMesCompra recebe como parâmetro o número do equipamento e seu mês de compra e o registra
@@ -35,4 +37,28 @@ Note que o atributo “valor” da classe Equipamento é privado, portanto, só 
     indiretamente, até mesmo pela classe herdeira.
  */
 public class Equipamento {
+    private final double[] valores;
+
+    public Equipamento(int numeroEquipamentos) {
+        this.valores = new double[numeroEquipamentos];
+    }
+
+    public int getNumeroEquipamentos() {
+        return this.valores.length;
+    }
+
+    public double getValor(int numeroEquipamento) {
+        return this.valores[numeroEquipamento];
+    }
+
+    public void setValor(int numeroEquipamento, double valor) {
+
+        if (valor < 0)
+            throw new IllegalArgumentException("Valor inválido");
+
+        if (numeroEquipamento < 0 || numeroEquipamento >= this.valores.length)
+            throw new IllegalArgumentException("Número de equipamento inválido");
+
+        this.valores[numeroEquipamento] = valor;
+    }
 }

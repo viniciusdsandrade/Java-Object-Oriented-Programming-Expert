@@ -9,7 +9,7 @@ Esta classe deverá dispor dos seguintes métodos:
         retorne:
             0  se as datas forem iguais;
             1  se a data corrente for maior que a do parâmetro;
-            -1 se a data do parâmetro for maior que a corrente.
+           -1  se a data do parâmetro for maior que a corrente.
     2 - getDia retorna o dia da data
     3 - getMes retorna o mês da data
     4 - getMesExtenso retorna o mês da data corrente por extenso
@@ -30,7 +30,8 @@ public class Data implements Comparable<Data>, Cloneable {
 
     public Data(byte dia, byte mes, short ano) {
 
-        if (!isValidDate(dia, mes, ano)) throw new IllegalArgumentException("A data não é válida.");
+        if (!isValidDate(dia, mes, ano))
+            throw new IllegalArgumentException("A data não é válida.");
 
         this.dia = dia;
         this.mes = mes;
@@ -50,7 +51,7 @@ public class Data implements Comparable<Data>, Cloneable {
         return mes != 2 || dia != 29 || isBissexto(ano);
     }
 
-    private static boolean isBissexto(short ano) {
+    public static boolean isBissexto(short ano) {
         if (ano < 1583) return ano % 4 == 0;
         if (ano % 400 == 0) return true;
         return ano % 4 == 0 && ano % 100 != 0;
@@ -166,9 +167,8 @@ public class Data implements Comparable<Data>, Cloneable {
         }
         dias += dia;
 
-        if (isBissexto((short) ano)) {
+        if (isBissexto((short) ano))
             dias += 1;
-        }
 
         return "Dia " + dias;
     }
@@ -204,9 +204,8 @@ public class Data implements Comparable<Data>, Cloneable {
         }
         dias += dia;
 
-        if (isBissexto((short) ano)) {
+        if (isBissexto((short) ano))
             dias += 1;
-        }
 
         return "Semana " + ((dias + diaDaSemana - 1) / 7 + 1);
     }
@@ -262,11 +261,10 @@ public class Data implements Comparable<Data>, Cloneable {
     }
 
     public void avanceUmAno() {
-        if (isValidDate(this.dia, this.mes, (short) (this.ano + 1))) {
+        if (isValidDate(this.dia, this.mes, (short) (this.ano + 1)))
             this.ano++;
-        } else {
+        else
             this.ano = 1;
-        }
     }
 
     public void retrocedaUmDia() {
@@ -282,7 +280,9 @@ public class Data implements Comparable<Data>, Cloneable {
             this.mes--;
         } else if (isValidDate((byte) 31, (byte) (this.mes - 1), this.ano)) {
             this.mes--;
-            if (this.mes == 1 || this.mes == 3 || this.mes == 5 || this.mes == 7 || this.mes == 8 || this.mes == 10 || this.mes == 12) {
+            if (this.mes == 1 || this.mes == 3 ||
+                    this.mes == 5 || this.mes == 7 ||
+                    this.mes == 8 || this.mes == 10 || this.mes == 12) {
                 this.dia = 31;
             } else {
                 this.dia = 30;
@@ -308,11 +308,11 @@ public class Data implements Comparable<Data>, Cloneable {
     }
 
     public void retrocedaUmAno() {
-        if (isValidDate(this.dia, this.mes, (short) (this.ano - 1))) {
+        if (isValidDate(this.dia, this.mes, (short) (this.ano - 1)))
             this.ano--;
-        } else {
-            this.ano = 1;
-        }
+        else
+            this.ano = -1;
+
     }
 
     public void avanceDias(int dias) {
@@ -511,12 +511,30 @@ public class Data implements Comparable<Data>, Cloneable {
         return ret;
     }
 
-    public Data(Data copia) {
-        if (copia == null) throw new IllegalArgumentException("A data não pode ser nula.");
+    public Data getMilenioAnterior() {
+        Data ret = new Data(this);
+        ret.retrocedaAnos(1000);
+        return ret;
+    }
 
-        this.dia = (byte) verifyAndCopy(copia.getDia());
-        this.mes = (byte) verifyAndCopy(copia.getMes());
-        this.ano = (short) verifyAndCopy(copia.getAno());
+    public Data(Data modelo) {
+        if (modelo == null) throw new IllegalArgumentException("A data não pode ser nula.");
+
+        this.dia = (byte) verifyAndCopy(modelo.getDia());
+        this.mes = (byte) verifyAndCopy(modelo.getMes());
+        this.ano = (short) verifyAndCopy(modelo.getAno());
+    }
+
+    @Override
+    public Object clone() {
+        Data clone = null;
+
+        try {
+            clone = new Data(this);
+        } catch (Exception ignored) {
+        }
+
+        return clone;
     }
 
     @Override
@@ -537,9 +555,9 @@ public class Data implements Comparable<Data>, Cloneable {
         final int prime = 31;
         int hash = 1;
 
-        hash *= prime + this.dia;
-        hash *= prime + this.mes;
-        hash *= prime + this.ano;
+        hash *= prime + Integer.hashCode(this.dia);
+        hash *= prime + Integer.hashCode(this.mes);
+        hash *= prime + Integer.hashCode(this.ano);
 
         if (hash < 0) hash *= -1;
 
@@ -548,22 +566,14 @@ public class Data implements Comparable<Data>, Cloneable {
 
     @Override
     public String toString() {
+
+        if(this.dia == 0 || this.mes == 0 || this.ano == 0)
+            return "Data vazia";
+
         if (this.ano > 0)
             return String.format("%02d/%02d/%04d", this.dia, this.mes, this.ano);
         else
             return String.format("%02d/%02d/%04d a.C.", this.dia, this.mes, this.ano * -1);
-    }
-
-    @Override
-    public Object clone() {
-        Data clone = null;
-
-        try {
-            clone = new Data(this);
-        } catch (Exception ignored) {
-        }
-
-        return clone;
     }
 
     @Override

@@ -6,7 +6,6 @@ public class TestDisciplina {
         linguagemProgramacao.setCodigo(123);
         float notaFinal = linguagemProgramacao.calcularMedia();
         System.out.printf("A média final é: %.2f\n", notaFinal);
-
         System.out.println(linguagemProgramacao);
     }
 }

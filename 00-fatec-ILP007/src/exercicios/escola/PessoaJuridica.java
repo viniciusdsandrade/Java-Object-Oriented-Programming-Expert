@@ -34,13 +34,17 @@ public class PessoaJuridica extends Pessoa implements Cloneable {
         this.razaoSocial = razaoSocial;
     }
 
-    public PessoaJuridica(PessoaJuridica copia) {
-        super(copia);
+    public PessoaJuridica(PessoaJuridica modelo) {
 
-        super.setNome((String) verifyAndCopy(copia.getNome()));
-        super.setEndereco((String) verifyAndCopy(copia.getEndereco()));
-        this.cnpj = (String) verifyAndCopy(copia.cnpj);
-        this.razaoSocial = (String) verifyAndCopy(copia.razaoSocial);
+        super(modelo);
+
+        if (modelo == null) throw new IllegalArgumentException("Cópia não pode ser nula");
+
+        super.setNome((String) verifyAndCopy(modelo.getNome()));
+        super.setEndereco((String) verifyAndCopy(modelo.getEndereco()));
+
+        this.cnpj = (String) verifyAndCopy(modelo.cnpj);
+        this.razaoSocial = (String) verifyAndCopy(modelo.razaoSocial);
     }
 
     @Override
