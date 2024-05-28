@@ -63,53 +63,53 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.ContaTelefoneTeste.executor": "Run",
-    "Application.EquipamentoTest.executor": "Run",
-    "Application.Exercicio03.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Q1.executor": "Run",
-    "Application.TestAluno.executor": "Run",
-    "Application.TestAnimal.executor": "Run",
-    "Application.TestData.executor": "Run",
-    "Application.TestDisciplina.executor": "Run",
-    "Application.TestEmpregado.executor": "Run",
-    "Application.TestFigura.executor": "Run",
-    "Application.TestProva.executor": "Debug",
-    "Application.TestVetor.executor": "Run",
-    "Application.TestVetorOrdenado.executor": "Run",
-    "Application.TestVoo.executor": "Run",
-    "Application.TestVoo2.executor": "Run",
-    "Application.Vetor.executor": "Coverage",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/vinic/OneDrive/Área de Trabalho/java-object-oriented-programming-expert",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.ContaTelefoneTeste.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EquipamentoTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Exercicio03.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Q1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestAluno.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestAnimal.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestData.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestDisciplina.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestEmpregado.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestFigura.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestProva.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.TestVetor.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestVetorOrdenado.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestVoo.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestVoo2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Vetor.executor&quot;: &quot;Coverage&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinic/OneDrive/Área de Trabalho/java-object-oriented-programming-expert&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vinic\OneDrive\Área de Trabalho\java-object-oriented-programming-expert\00-fatec-ILP007\src\p1\png" />
@@ -266,6 +266,7 @@
       <workItem from="1714762668932" duration="117000" />
       <workItem from="1716550893506" duration="456000" />
       <workItem from="1716551370762" duration="22000" />
+      <workItem from="1716822543789" duration="68000" />
     </task>
     <task id="LOCAL-00001" summary="feat: anotacoes de poo fatec-campinas">
       <option name="closed" value="true" />
