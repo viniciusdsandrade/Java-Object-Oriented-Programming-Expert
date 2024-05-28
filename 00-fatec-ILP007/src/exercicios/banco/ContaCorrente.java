@@ -1,6 +1,6 @@
 package exercicios.banco;
 
-class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta {
     private double limiteChequeEspecial;
 
     // Construtor
@@ -9,7 +9,7 @@ class ContaCorrente extends Conta {
         this.limiteChequeEspecial = limiteChequeEspecial;
     }
 
-    // Método para sobrescrever o saque considerando o limite do cheque especial
+    // Metodo para sobrescrever o saque considerando o limite do cheque especial
     @Override
     public void sacar(double valor) {
         if (valor <= 0 || !((saldo + limiteChequeEspecial) >= valor))

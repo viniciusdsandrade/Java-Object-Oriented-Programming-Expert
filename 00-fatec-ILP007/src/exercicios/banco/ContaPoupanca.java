@@ -10,7 +10,7 @@ class ContaPoupanca extends Conta {
         this.taxaRendimento = taxaRendimento;
     }
 
-    // Método para aplicar rendimento na conta poupança
+    // Metodo para aplicar rendimento na conta poupança
     public void aplicarRendimento() {
         saldo *= (1 + taxaRendimento);
         System.out.println("Rendimento aplicado. Novo saldo: R$" + saldo);
