@@ -35,14 +35,9 @@ public class Q5 {
     }
 
     public static int multiplicacao(int a, int b) {
-        if (b == 0) return 0; // Caso base: qualquer número multiplicado por 0 é 0
-        if (b == 1) return a; // Caso base: qualquer número multiplicado por 1 é ele mesmo
-
-        if (isNegative(b)) {
-            if (isNegative(a)) return soma(-a, multiplicacao(-a, subtracao(-b, 1)));
-            return soma(a, multiplicacao(a, subtracao(-b, 1)));
-        }
-
-        return soma(a, multiplicacao(a, subtracao(b, 1)));
+        if (b == 0) return 0; // Caso base: se b é 0, o resultado é 0
+        if (isNegative(b))
+            return subtracao(multiplicacao(a, ++b), a);
+        return soma(multiplicacao(a, --b), a); // Caso geral: soma a resultado da multiplicação dê a (b-1)
     }
 }

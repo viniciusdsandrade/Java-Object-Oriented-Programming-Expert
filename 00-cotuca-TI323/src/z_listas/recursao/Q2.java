@@ -4,7 +4,7 @@ import static src.z_listas.recursao.Q1.isNegative;
 
 public class Q2 {
     /*
-    Daqui para cima, é admissível fazer uma função auxiliar com o único propósito de auxiliar; daqui para baixo, só se pode usar como auxiliar uma outra função pedida nesta lista de exercícios.
+    Daqui para cima, é admissível fazer uma função auxiliar com o único propósito de auxiliar; daqui para baixo, só se pode usar como auxiliar outra função pedida nesta lista de exercícios.
     2. Faça uma ÚNICA função que, recebendo como parâmetro dois números inteiros, resulta a soma deles.
     Importante lembrar que os números com os quais vocês trabalharão são inteiros, logo, podem ser positivos ou negativos
     Fica proibido declarar variáveis, fazer uso de
